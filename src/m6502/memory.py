@@ -17,13 +17,13 @@ class Memory:
         return True
 
     def __getitem__(self, address: int) -> int:
-        self.validate_address(address)
+        self.__validate_address(address)
 
         return self.memory[address]
 
     def __setitem__(self, address: int, value: int) -> int:
         """Set the value at the specified memory address"""
-        self.validate_address(address)
+        self.__validate_address(address)
 
         if value.bit_length() > 8:
             raise ValueError("Value too large")
