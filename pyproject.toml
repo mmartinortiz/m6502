@@ -2,7 +2,7 @@
 name = "m6502"
 version = "1.0.0"
 description = "An emulator of the 6502 processor"
-readme = "README.md" 
+readme = "README.md"
 requires-python = ">=3.7"
 license = {file = "LICENSE.txt"}
 authors = [
@@ -21,10 +21,10 @@ dependencies = [
 # Similar to `dependencies` above, these must be valid existing
 # projects.
 [project.optional-dependencies]
-dev = ["black", "isort"]
+dev = ["black", "isort", "pre-commit>=3.5.0"]
 test = ["coverage", "pytest", "tox"]
 
-[project.urls] 
+[project.urls]
 "Homepage" = "https://github.com/pypa/sampleproject"
 "Bug Reports" = "https://github.com/pypa/sampleproject/issues"
 "Funding" = "https://donate.pypi.org"
@@ -48,3 +48,10 @@ build-backend = "setuptools.build_meta"
 [tool.isort]
 profile = "black"
 
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths= [
+"tests",
+]
+pythonpath = "src"
