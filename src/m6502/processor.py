@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, ValuesView
 
 from m6502.memory import Memory
 
@@ -44,7 +44,34 @@ class Processor:
         # Hardcoded stack pointer post-reset
         self.stack_pointer = 0x01FD
 
-        self.cycles: Literal[0] = 0
+        self.cycles = 0
         self.flag_i = True
         self.flag_d = False
         self.flag_b = True
+
+    def read_byte(self, address: int) -> int:
+        """
+        Read a byte from memory.
+
+        :param address: The address to read from.
+        :return: int
+        """
+
+        data = self.memory[address]
+        self.cycles += 1
+
+        return data
+
+    def write_byte(self, address: int, value: int) -> None:
+        """
+        Write a byte to memory.
+
+        :param address: The address to write to.
+        :param value: The value to write.
+        :return: None
+        """
+
+        self.memory[address] = value
+        self.cycles += 1
+
+        return
