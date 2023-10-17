@@ -51,3 +51,23 @@ def test_cpu_read_write_byte(cpu, address, value, expected):
         cpu.flag_i,
         read_value,
     ) == expected
+
+
+@pytest.mark.parametrize(
+    "address, value, expected",
+    [(0x0001, 0x5AA5, (0xFCE2, 0x01FD, 4, True, False, True, 0x5AA5))],
+)
+def testcpu_read_write_word(cpu, address, value, expected):
+    cpu.reset()
+    cpu.write_word(address, value)
+    read_value = cpu.read_word(address)
+
+    assert (
+        cpu.program_counter,
+        cpu.stack_pointer,
+        cpu.cycles,
+        cpu.flag_b,
+        cpu.flag_d,
+        cpu.flag_i,
+        read_value,
+    ) == expected
