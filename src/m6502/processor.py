@@ -85,8 +85,13 @@ class Processor:
         :return: int
         """
 
+        # We rely on the hardware architecture running the emulator.
+        # If it is little endian, as the m6502, it will read both
+        # bytes in order
         if sys.byteorder == "little":
             data = self.read_byte(address) | (self.read_byte(address + 1) << 8)
+        # In case of big endian, we read the most significant byte
+        # and shift it 8 bits.
         else:
             data = self.read_byte(address) << 8 | self.read_byte(address + 1)
 
