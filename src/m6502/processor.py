@@ -106,3 +106,27 @@ class Processor:
         else:
             self.write_byte(address, (value >> 8) & 0xFF)
             self.write_byte(address + 1, value & 0xFF)
+
+    def fetch_byte(self) -> int:
+        """
+        Uses the program counter to return the memory value at that address.
+
+        :return: int
+        """
+
+        data = self.read_byte(address=self.program_counter)
+        self.program_counter += 1
+
+        return data
+
+    def fetch_word(self) -> int:
+        """
+        Uses the program counter to return the memory value at that address.
+
+        :return: int
+        """
+
+        data = self.read_word(address=self.program_counter)
+        self.program_counter += 2
+
+        return data
